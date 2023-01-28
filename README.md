@@ -5,3 +5,4 @@ Exploiting all ethernaut challenges with foundry
 Claim ownership of the contract and reduce its balance to 0.
 
 ### Challenge 2: Fallout
+Claim ownership of the contract 
