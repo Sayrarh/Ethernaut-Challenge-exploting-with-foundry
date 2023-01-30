@@ -8,6 +8,7 @@ import "../src/CoinFlip.sol";
 contract CoinFlipTest is Test{
     CoinFlip coinflip;
 
+    address owner;
     address attacker = mkaddr("attacker");
 
     function setUp() public{
