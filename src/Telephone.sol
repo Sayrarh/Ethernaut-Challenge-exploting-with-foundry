@@ -13,7 +13,7 @@ contract Telephone {
     if (tx.origin != msg.sender) {
       owner = _owner;
     }else{
-        revert ("not owner"); // I Added this line for testing purpose
+        revert (""); // I Added this line for testing purpose
     }
   }
 }
