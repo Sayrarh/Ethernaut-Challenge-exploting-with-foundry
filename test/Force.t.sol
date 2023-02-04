@@ -15,9 +15,11 @@ contract ForceTest is Test{
 
     function testForce() public {
         vm.startPrank(exploiter);
+        vm.deal(exploiter, 1 ether);
         //passing ether/wei and specify the firce contract as the recipient on deployment
-        new Forcing{value: 1 ether}(payable(address((instanceAddress))));
-        assertEq(address(instanceAddress).balance, 2);
+        Forcing fohack = new Forcing{value: 0.1 ether}(payable(address((instanceAddress))));
+        //assert that the instance address balance as increased by 0.1
+        assertEq(address(instanceAddress).balance, 0.1 ether);
         vm.stopPrank();
     }
 
