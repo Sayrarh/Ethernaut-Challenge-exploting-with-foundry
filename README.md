@@ -1,5 +1,5 @@
 # Ethernaut-Challenge-with-Foundry
-Exploiting all ethernaut challenges with foundry
+Exploiting all ethernaut challenges with foundry, All exploits are in the test folder.
 
 ### Challenge 1: Fallback
 Claim ownership of the contract and reduce its balance to 0.
@@ -22,3 +22,6 @@ Claim ownership of the Delegate Contract
 
 ### Challenge 7: Force
 The goal of this level is to make the balance of the contract greater than zero.
+
+### Challenge 8: 
+Unlock the vault to pass the level!
