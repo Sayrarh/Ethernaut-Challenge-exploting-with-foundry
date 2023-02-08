@@ -1,5 +1,5 @@
 # Ethernaut-Challenge-with-Foundry
-Exploiting all ethernaut challenges with foundry, All exploits are in the test folder.
+Exploiting all ethernaut challenges with foundry, All exploits are found in the test folder.
 
 ### Challenge 1: Fallback
 Claim ownership of the contract and reduce its balance to 0.
@@ -25,3 +25,6 @@ The goal of this level is to make the balance of the contract greater than zero.
 
 ### Challenge 8: 
 Unlock the vault to pass the level!
+
+### Challenge 9:
+The task of the game is to be the player who sends the largest amount of ether to the game, thus becoming the "king." The objective of breaking the game would be to identify and exploit any vulnerabilities in the game's code that would allow a player to win the prize without actually sending the largest amount of ether.
